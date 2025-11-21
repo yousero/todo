@@ -110,9 +110,19 @@
       const elem = document.createElement('div')
       elem.className = 'task'
       elem.textContent = value
+      let move = false
+      elem.onmousemove = function (e) {
+        move = true
+      }
+      elem.onmousedown = function (e) {
+        move = false
+      }
       elem.onclick = function (e) {
-        elem.classList.toggle('removed-task')
-        refresh()
+        if (!move) {
+          elem.classList.toggle('removed-task')
+          refresh()
+          move = false
+        }
       }
       return elem
     }
